@@ -41,6 +41,7 @@ import {
   Search,
   Sidebar,
   SidebarItem,
+  NavBar,
 } from "vant";
 
 const app = createApp(App);
@@ -92,5 +93,6 @@ app
   .use(Tabbar)
   .use(TabbarItem)
   .use(Sidebar)
-  .use(SidebarItem);
+  .use(SidebarItem)
+  .use(NavBar);
 app.use(router).use(store).mount("#app");
