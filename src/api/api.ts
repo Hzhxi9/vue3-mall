@@ -1,5 +1,6 @@
 import request from "../utils/request";
 import * as ResTypes from "../types/response";
+import * as ReqTypes from "../types/request";
 
 // Home
 export function getHome(): Promise<ResTypes.HomeResponse> {
@@ -10,7 +11,7 @@ export function getHome(): Promise<ResTypes.HomeResponse> {
 }
 
 // Goods
-export function getDetail(params: { id: number } = { id: 6 }) {
+export function getDetail(params: { id: number }) {
   return request({
     url: "/goods/detail",
     method: "GET",
@@ -75,7 +76,7 @@ export function getByCartItemIds(params: { id: number }) {
 }
 
 // Address
-export function addAddress(data: any) {
+export function addAddress(data: ReqTypes.AddAddressParams) {
   return request({
     url: "/address",
     method: "POST",
@@ -83,7 +84,7 @@ export function addAddress(data: any) {
   });
 }
 
-export function editAddress(data: any) {
+export function editAddress(data: ReqTypes.AddAddressParams) {
   return request({
     url: "/address",
     method: "PUT",
@@ -130,7 +131,7 @@ export function getUserInfo() {
   });
 }
 
-export function editUserInfo(data: any) {
+export function editUserInfo(data: ReqTypes.EditUserInfoParams) {
   return request({
     url: "/user/info",
     method: "PUT",
@@ -138,7 +139,7 @@ export function editUserInfo(data: any) {
   });
 }
 
-export function login(data: any) {
+export function login(data: ReqTypes.LoginParams) {
   return request({
     url: "/user/login",
     method: "POST",
@@ -153,7 +154,7 @@ export function logout() {
   });
 }
 
-export function register(data: any) {
+export function register(data: ReqTypes.LoginParams) {
   return request({
     url: "/user/register",
     method: "POST",
@@ -162,7 +163,7 @@ export function register(data: any) {
 }
 
 // Order
-export function createOreder(data: any) {
+export function createOreder(data: ReqTypes.CreateOrderParams) {
   return request({
     url: "/saveOrder",
     method: "POST",
@@ -170,7 +171,7 @@ export function createOreder(data: any) {
   });
 }
 
-export function getOrderList(params: any) {
+export function getOrderList(params: ReqTypes.OrderListParams) {
   return request({
     url: "/order",
     method: "GET",
@@ -200,7 +201,7 @@ export function confirmOrder(params: { id: number }) {
   });
 }
 
-export function payOrder(params: any) {
+export function payOrder(params: ReqTypes.PayOrderParams) {
   return request({
     url: "/paySuccess",
     method: "GET",
