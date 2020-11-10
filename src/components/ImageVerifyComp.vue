@@ -10,7 +10,7 @@
 <script lang="ts">
 import { reactive, toRefs, onMounted, ref } from "vue";
 export default {
-  name: "VueImageVerify",
+  name: "ImageVerifyComp",
   setup() {
     const verify = ref<HTMLCanvasElement | null>(null);
     const state = reactive({
