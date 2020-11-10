@@ -19,7 +19,7 @@ export function getDetail(params: { id: number }) {
   });
 }
 
-export function getCategory() {
+export function getCategory(): Promise<ResTypes.CategoriesData[]> {
   return request({
     url: "/categories",
     params: "GET",

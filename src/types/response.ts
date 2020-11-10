@@ -18,3 +18,11 @@ export interface GoodsData {
   sellingPrice: number;
   tag: string;
 }
+
+export interface CategoriesData {
+  categoryId: number;
+  categoryLevel: number;
+  categoryName: string;
+  parentId: number;
+  secondLevelCategoryVOS: CategoriesData[];
+}

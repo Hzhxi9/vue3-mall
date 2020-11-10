@@ -8,8 +8,8 @@
         </div>
         <span>登录</span>
     </header>
-    <SwipeComp :list="carousels"></SwipeComp>
 
+    <SwipeComp :list="carousels"></SwipeComp>
     <nav>
         <ul>
             <li v-for="e in categoryList" :key="e.categoryId">

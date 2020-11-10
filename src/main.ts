@@ -39,6 +39,8 @@ import {
   Tabbar,
   TabbarItem,
   Search,
+  Sidebar,
+  SidebarItem,
 } from "vant";
 
 const app = createApp(App);
@@ -88,5 +90,7 @@ app
   .use(CheckboxGroup)
   .use(Search)
   .use(Tabbar)
-  .use(TabbarItem);
+  .use(TabbarItem)
+  .use(Sidebar)
+  .use(SidebarItem);
 app.use(router).use(store).mount("#app");
