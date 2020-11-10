@@ -9,6 +9,7 @@
     "@better-scroll/core": "^2.0.5",
     "axios": "^0.21.0",
     "better-scroll": "^2.0.5",
+    "normalize.css": "^8.0.1",
     "typescript": "^4.0.5",
     "vant": "^3.0.0-beta.7",
     "vue": "^3.0.2",

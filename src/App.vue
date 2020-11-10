@@ -3,6 +3,7 @@
 </template>
 
 <script lang="ts">
+import "normalize.css";
 export default {
     name: "App",
 };

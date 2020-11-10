@@ -1,15 +1,16 @@
 import request from "../utils/request";
+import * as ResTypes from "../types/response";
 
 // Home
-export function getHome() {
+export function getHome(): Promise<ResTypes.HomeResponse> {
   return request({
     url: "/index-infos",
-    params: "GET",
+    method: "GET",
   });
 }
 
 // Goods
-export function getDetail(params: { id: number }) {
+export function getDetail(params: { id: number } = { id: 6 }) {
   return request({
     url: "/goods/detail",
     method: "GET",
@@ -105,10 +106,7 @@ export function getDefaultAddress() {
   });
 }
 
-export function getAddressList(params: {
-  pageNumber: number;
-  pageSize: number;
-}) {
+export function getAddressList(params: { pageNumber: number; pageSize: number }) {
   return request({
     url: "/address",
     method: "GET",

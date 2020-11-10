@@ -37,6 +37,7 @@ service.interceptors.response.use(
 
 export default function request(config: AxiosRequestConfig) {
   return service(config).then(response => {
+    Toast.loading("加载中");
     if (typeof response.data !== "object") {
       Toast.fail("服务器异常");
       return Promise.reject(response);
@@ -46,6 +47,7 @@ export default function request(config: AxiosRequestConfig) {
       if (response.data.resultCode === 416) router.push({ name: "Login" });
       return Promise.reject(response.data);
     }
-    return Promise.resolve(response.data);
+    Toast.clear();
+    return Promise.resolve(response.data.data);
   });
 }

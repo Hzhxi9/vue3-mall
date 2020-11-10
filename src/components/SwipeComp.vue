@@ -1,25 +1,31 @@
 <template>
-<van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-    <van-swipe-item>1</van-swipe-item>
-    <van-swipe-item>2</van-swipe-item>
-    <van-swipe-item>3</van-swipe-item>
-    <van-swipe-item>4</van-swipe-item>
+<van-swipe class="carousel" :autoplay="3000" indicator-color="#1baeae">
+    <van-swipe-item v-for="e in list" :key="e.redirectUrl">
+        <img :src="e.carouselUrl" @click="jumpToPage(e.redirectUrl)" />
+    </van-swipe-item>
 </van-swipe>
 </template>
 
 <script lang="ts">
-import {
-    Swipe,
-    SwipeItem
-} from "vant";
+import * as ResTypes from "../types/response";
+import mixins from "../mixins";
 export default {
     name: "SwipeComp",
-    components: {
-        [Swipe.name]: Swipe,
-        [SwipeItem.name]: SwipeItem,
+    mixins: [mixins],
+    props: {
+        list: {
+            type: Array as() => ResTypes.CarouselsData[],
+        },
     },
 };
 </script>
 
 <style lang="less">
+.carousel {
+    img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+}
 </style>
