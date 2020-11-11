@@ -43,10 +43,15 @@ export interface PayOrderParams {
 export interface EditUserInfoParams {
   introduceSign: string;
   nickName: string;
-  passwordMd5: string;
+  passwordMd5?: string;
 }
 
 export interface LoginParams {
+  loginName: string;
+  passwordMd5: string;
+}
+
+export interface RegisterParams {
   loginName: string;
   password: string;
 }

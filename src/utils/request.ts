@@ -9,12 +9,13 @@ const baseURL =
 
 const service = axios.create({
   baseURL,
-  withCredentials: true,
-  timeout: 3000,
+  // withCredentials: true,
+  timeout: 5000,
 });
 
 service.defaults.headers["X-Requested-With"] = "XMLHttpRequest";
 service.defaults.headers.post["Content-Type"] = "application/json";
+service.defaults.headers["token"] = localStorage.getItem("token") || null;
 
 service.interceptors.request.use(
   config => config,
@@ -44,7 +45,7 @@ export default function request(config: AxiosRequestConfig) {
     }
     if (response.data.resultCode !== 200) {
       if (response.data.message) Toast.fail(response.data.message);
-      if (response.data.resultCode === 416) router.push({ name: "Login" });
+      // if (response.data.resultCode === 416) router.push({ name: "Login" });
       return Promise.reject(response.data);
     }
     Toast.clear();

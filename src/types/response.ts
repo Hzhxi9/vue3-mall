@@ -26,3 +26,9 @@ export interface CategoriesData {
   parentId: number;
   secondLevelCategoryVOS: CategoriesData[];
 }
+
+export interface UserInfoData {
+  introduceSign: string;
+  loginName: string;
+  nickName: string;
+}

@@ -1,14 +1,23 @@
 import { createStore } from "vuex";
+import { UserMutations } from "./mutation-types";
 
-interface StateType {}
+interface StateType {
+  token: string | null;
+}
 
 const store = createStore({
-  state(): StateType {
-    return {};
+  state: {
+    token: null,
   },
-  modules: {},
+  mutations: {
+    [UserMutations.SET_TOKEN](state: StateType, token: string | null) {
+      state.token = token;
+    },
+  },
   actions: {},
-  getters: {},
+  getters: {
+    token: (state: { token: string | null }) => state.token,
+  },
 });
 
 export default store;

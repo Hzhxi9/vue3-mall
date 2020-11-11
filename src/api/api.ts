@@ -124,7 +124,7 @@ export function getAddressDetail(params: { id: number }) {
 }
 
 // User
-export function getUserInfo() {
+export function getUserInfo(): Promise<ResTypes.UserInfoData> {
   return request({
     url: "/user/info",
     method: "GET",
@@ -154,7 +154,7 @@ export function logout() {
   });
 }
 
-export function register(data: ReqTypes.LoginParams) {
+export function register(data: ReqTypes.RegisterParams) {
   return request({
     url: "/user/register",
     method: "POST",
