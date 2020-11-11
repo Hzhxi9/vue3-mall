@@ -1,35 +1,47 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import Home from "../views/Home.vue";
+import Cart from "../views/Cart.vue";
+import Mine from "../views/Mine.vue";
+import Categories from "../views/Categories.vue";
+import Login from "../views/Login.vue";
+import User from "../views/User.vue";
+import GoodDetail from "../views/GoodDetail.vue";
 
 const routes = [
   {
     path: "/",
     name: "Home",
-    component: () => import("../views/Home.vue"),
+    component: Home,
   },
   {
     path: "/cart",
     name: "Cart",
-    component: () => import("../views/Cart.vue"),
+    component: Cart,
   },
   {
     path: "/mine",
     name: "Mine",
-    component: () => import("../views/Mine.vue"),
+    component: Mine,
   },
   {
     path: "/categories",
     name: "Categories",
-    component: () => import("../views/Categories.vue"),
+    component: Categories,
   },
   {
     path: "/login",
     name: "Login",
-    component: () => import("../views/Login.vue"),
+    component: Login,
   },
   {
     path: "/user",
     name: "User",
-    component: () => import("../views/User.vue"),
+    component: User,
+  },
+  {
+    path: "/good-detail",
+    name: "GoodDetail",
+    component: GoodDetail,
   },
 ];
 

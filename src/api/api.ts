@@ -13,9 +13,8 @@ export function getHome(): Promise<ResTypes.HomeResponse> {
 // Goods
 export function getDetail(params: { id: number }) {
   return request({
-    url: "/goods/detail",
+    url: "/goods/detail/" + params.id,
     method: "GET",
-    params,
   });
 }
 
@@ -107,7 +106,10 @@ export function getDefaultAddress() {
   });
 }
 
-export function getAddressList(params: { pageNumber: number; pageSize: number }) {
+export function getAddressList(params: {
+  pageNumber: number;
+  pageSize: number;
+}) {
   return request({
     url: "/address",
     method: "GET",
