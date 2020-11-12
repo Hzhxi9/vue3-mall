@@ -11,7 +11,7 @@ export function getHome(): Promise<ResTypes.HomeResponse> {
 }
 
 // Goods
-export function getDetail(params: { id: number }) {
+export function getDetail(params: { id: number }): Promise<ResTypes.GoodsDetailData> {
   return request({
     url: "/goods/detail/" + params.id,
     method: "GET",
@@ -106,10 +106,7 @@ export function getDefaultAddress() {
   });
 }
 
-export function getAddressList(params: {
-  pageNumber: number;
-  pageSize: number;
-}) {
+export function getAddressList(params: { pageNumber: number; pageSize: number }) {
   return request({
     url: "/address",
     method: "GET",

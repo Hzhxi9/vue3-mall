@@ -172,5 +172,10 @@ export default {
             }
         }
     }
+
+    main {
+        display: flex;
+        flex-direction: column;
+    }
 }
 </style>

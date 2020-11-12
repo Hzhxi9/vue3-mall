@@ -32,3 +32,15 @@ export interface UserInfoData {
   loginName: string;
   nickName: string;
 }
+
+export interface GoodsDetailData {
+  goodsCarouselList: string[];
+  goodsCoverImg: string;
+  goodsDetailContent: string;
+  goodsId: number;
+  goodsIntro: string;
+  goodsName: string;
+  originalPrice: number;
+  sellingPrice: number;
+  tag: string;
+}

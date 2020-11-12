@@ -61,7 +61,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .user-info {
     display: flex;
     padding: 6.67vw 5.33vw;
@@ -78,6 +78,7 @@ export default {
 
     ul {
         margin-left: 5.33vw;
+        flex: 1;
         display: flex;
         flex-direction: column;
         justify-content: space-between;

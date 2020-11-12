@@ -20,8 +20,10 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .carousel {
+    width: 100%;
+
     img {
         width: 100%;
         height: auto;

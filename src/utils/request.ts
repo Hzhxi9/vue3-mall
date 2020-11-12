@@ -9,8 +9,8 @@ const baseURL =
 
 const service = axios.create({
   baseURL,
-  // withCredentials: true,
-  timeout: 5000,
+  withCredentials: true,
+  timeout: 15000,
 });
 
 service.defaults.headers["X-Requested-With"] = "XMLHttpRequest";
