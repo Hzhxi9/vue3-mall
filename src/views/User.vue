@@ -83,7 +83,7 @@ export default {
                 nickName: state.nickName,
                 passwordMd5: undefined,
             };
-            values.password && (params.passwordMd5 = mvalues.password);
+            // values.password && (params.passwordMd5 = mvalues.password);
             // values.password && (params.passwordMd5 = md5(values.password));
             await editUserInfo(params);
             Toast.success("保存成功");

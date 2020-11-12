@@ -23,7 +23,7 @@
 <script lang="ts">
 import mixins from "../mixins";
 import ImageVerifyComp from "../components/ImageVerifyComp.vue";
-import md5 from "js-md5";
+// import md5 from "js-md5";
 import {
     login,
     register
@@ -75,7 +75,8 @@ export default {
             if (state.isLogin) {
                 const res = await login({
                     loginName: value.username,
-                    passwordMd5: md5(value.password),
+                    // passwordMd5: md5(value.password),
+                    passwordMd5: value.password,
                 });
 
                 store.commit(UserMutations.SET_TOKEN, res);

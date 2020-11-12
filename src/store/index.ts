@@ -22,6 +22,23 @@ const store = createStore({
     [UserMutations.SET_TOKEN](state: StateType, token: string | null) {
       state.token = token;
     },
+    [UserMutations.SET_CHECKED](
+      state: StateType,
+      goods: {
+        goodsId: number;
+        checked: boolean;
+      }
+    ) {
+      const { goodsId, checked } = goods;
+      const index = state.goods.findIndex((item) => item.goodsId === goodsId);
+      state.goods[index].checked = checked;
+      console.log(state.goods, "state.goods");
+    },
+    [UserMutations.DEL_GOODS](state: StateType, goodsId: number) {
+      const index = state.goods.findIndex((item) => item.goodsId === goodsId);
+      state.goods.splice(index, 1);
+      console.log("state", state.goods);
+    },
     [UserMutations.SET_GOODS](
       state: StateType,
       good: {
@@ -30,23 +47,35 @@ const store = createStore({
         goodsName: string;
         originalPrice: number;
         goodsNum: number;
+        type: string;
       }
     ) {
-      const hasGood = state.goods.findIndex(item => item.goodsId === good.goodsId);
-      if (hasGood === -1) {
-        const { goodsCoverImg, goodsId, goodsName, originalPrice } = good;
-        state.goods.push({
-          goodsCoverImg,
-          goodsId,
-          goodsName,
-          originalPrice,
-          goodsNum: 1,
-          checked: true,
-        });
-      } else {
-        let goodsNum = state.goods[hasGood].goodsNum + 1;
-        console.log(goodsNum, "goodsNum");
-        state.goods[hasGood].goodsNum = goodsNum;
+      const hasGood = state.goods.findIndex(
+        (item) => item.goodsId === good.goodsId
+      );
+      switch (good.type) {
+        case "add":
+          if (hasGood === -1) {
+            const { goodsCoverImg, goodsId, goodsName, originalPrice } = good;
+            state.goods.push({
+              goodsCoverImg,
+              goodsId,
+              goodsName,
+              originalPrice,
+              goodsNum: 1,
+              checked: true,
+            });
+          } else {
+            let goodsNum = state.goods[hasGood].goodsNum + 1;
+            console.log(goodsNum, "goodsNum");
+            state.goods[hasGood].goodsNum = goodsNum;
+          }
+          break;
+        case "reduce":
+          let goodsNum = state.goods[hasGood].goodsNum - 1;
+          console.log(goodsNum, "goodsNum");
+          state.goods[hasGood].goodsNum = goodsNum;
+          break;
       }
 
       console.log(state.goods, "state.goods");
