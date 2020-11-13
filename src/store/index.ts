@@ -30,12 +30,16 @@ const store = createStore({
       }
     ) {
       const { goodsId, checked } = goods;
-      const index = state.goods.findIndex((item) => item.goodsId === goodsId);
+      const index = state.goods.findIndex(item => item.goodsId === goodsId);
       state.goods[index].checked = checked;
       console.log(state.goods, "state.goods");
     },
+    [UserMutations.SET_ALLCHECKED](state: StateType, checked: boolean) {
+      state.goods.forEach(item => (item.checked = checked));
+      console.log("state.goods", state.goods);
+    },
     [UserMutations.DEL_GOODS](state: StateType, goodsId: number) {
-      const index = state.goods.findIndex((item) => item.goodsId === goodsId);
+      const index = state.goods.findIndex(item => item.goodsId === goodsId);
       state.goods.splice(index, 1);
       console.log("state", state.goods);
     },
@@ -50,9 +54,7 @@ const store = createStore({
         type: string;
       }
     ) {
-      const hasGood = state.goods.findIndex(
-        (item) => item.goodsId === good.goodsId
-      );
+      const hasGood = state.goods.findIndex(item => item.goodsId === good.goodsId);
       switch (good.type) {
         case "add":
           if (hasGood === -1) {
