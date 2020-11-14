@@ -3,14 +3,16 @@ import { UserMutations } from "./mutation-types";
 
 interface StateType {
   token: string | null;
-  goods: {
-    goodsCoverImg: string;
-    goodsId: number;
-    goodsName: string;
-    originalPrice: number;
-    goodsNum: number;
-    checked: boolean;
-  }[];
+  goods: GoodType[];
+}
+
+export interface GoodType {
+  goodsCoverImg: string;
+  goodsId: number;
+  goodsName: string;
+  originalPrice: number;
+  goodsNum: number;
+  checked: boolean;
 }
 
 const store = createStore({

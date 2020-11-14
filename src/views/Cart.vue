@@ -5,7 +5,10 @@
     <van-button round color="#1baeae" @click="jumpToPage({ name: 'Home' })">前往选购</van-button>
 </div>
 <div class="cart" v-else>
-    <GoodsCardComp v-for="(item, index) in goods" :key="index" :detail="item" />
+    <van-checkbox-group v-model="result" ref="checkboxGroup" @change="groupChange">
+        <GoodsCardComp v-for="(item, index) in goods" :key="index" :detail="item" :name="item.goodsId" />
+    </van-checkbox-group>
+
     <van-submit-bar :price="total" button-text="提交订单" @submit="onSubmit" :style="{ bottom: '50px' }">
         <van-checkbox v-model="checked" @click="changeAll">全选</van-checkbox>
     </van-submit-bar>
@@ -24,12 +27,16 @@ import {
     toRefs,
     ref,
     computed,
-    watch
+    watch,
+    onMounted
 } from "vue";
 import mixins from "../mixins";
 import {
     UserMutations
 } from "../store/mutation-types";
+import {
+    GoodType
+} from "../store";
 export default {
     name: "Cart",
     mixins: [mixins],
@@ -41,6 +48,13 @@ export default {
         const store = useStore();
         const state = reactive({
             checked: true,
+            result: [] as number[],
+        });
+
+        onMounted(() => {
+            if (Array.isArray(goods.value)) {
+                state.result = goods.value.map((item: GoodType) => item.goodsId);
+            }
         });
 
         const goods = computed(() => store.getters.goods);
@@ -48,24 +62,24 @@ export default {
         const total = computed(() => {
             let result = 0;
             if (Array.isArray(goods.value)) {
-                goods.value.forEach((item) => {
-                    if (item.checked) {
-                        result = result + item.goodsNum * item.originalPrice * 100;
-                    }
+                let _goods = goods.value.filter((item) =>
+                    state.result.includes(item.goodsId)
+                );
+                _goods.forEach((item) => {
+                    result += item.originalPrice * item.goodsNum * 100;
                 });
             }
             return result;
         });
 
-        watch(
-            () => state.checked,
-            (newVal: boolean) => {}
-        );
+        const groupChange = (result: number[]) => {
+            state.checked = result.length === goods.value.length ? true : false;
+        };
 
         const changeAll = () => {
-            goods.value.forEach((item) => (item.checked = state.checked));
-            console.log("value", goods.value);
-            store.commit(UserMutations.SET_ALLCHECKED, state.checked);
+            state.result = state.checked ?
+                goods.value.map((item: GoodType) => item.goodsId) :
+                [];
         };
 
         return {
@@ -73,6 +87,7 @@ export default {
             goods,
             total,
             changeAll,
+            groupChange,
         };
     },
 };

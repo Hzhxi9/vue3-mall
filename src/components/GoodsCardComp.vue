@@ -1,8 +1,8 @@
 <template>
 <div class="goods-card">
     <van-swipe-cell>
-        <van-checkbox v-model="checked"></van-checkbox>
-        <van-card :num="detail.goodsNum" :price="price" :title="detail.goodsName" :thumb="detail.goodsCoverImg">
+        <van-checkbox :name="name"></van-checkbox>
+        <van-card :num="detail.goodsNum" :price="price" :title="detail.goodsName" :thumb="$filters.prefix(detail.goodsCoverImg)">
             <template #footer>
                 <van-stepper v-model="value" min="1" max="5" />
             </template>
@@ -42,6 +42,10 @@ export default {
                 checked: boolean;
             },
             default: () => {},
+        },
+        name: {
+            type: Number,
+            default: 0,
         },
     },
     setup(props, ctx) {
