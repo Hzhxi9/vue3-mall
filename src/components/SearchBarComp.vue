@@ -9,7 +9,7 @@
       @search="search"
     >
       <template #left v-if="showArrow">
-        <van-icon name="arrow-left" />
+        <van-icon name="arrow-left" @click="goBack" />
       </template>
     </van-search>
   </div>
@@ -18,6 +18,7 @@
 <script lang="ts">
 import { reactive, toRefs } from "vue";
 import { Toast } from "vant";
+import { useRouter } from "vue-router";
 export default {
   name: "SearchBarComp",
   props: {
@@ -27,6 +28,7 @@ export default {
     },
   },
   setup(props, ctx) {
+    const router = useRouter();
     const state = reactive({
       keyword: "",
     });
@@ -39,9 +41,14 @@ export default {
       ctx.emit("search", value);
     };
 
+    const goBack = () => {
+      router.back();
+    };
+
     return {
       ...toRefs(state),
       search,
+      goBack,
     };
   },
 };

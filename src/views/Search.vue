@@ -1,6 +1,6 @@
 <template>
   <div class="search-box">
-    <SearchBarComp showArrow @search="handleSearch" />
+    <SearchBarComp showArrow @search="handleSearch" ref="searchRef" />
 
     <van-tabs v-model:active="active" color="#1baeae" @click="changeTab">
       <van-tab title="推荐" name=""></van-tab>
@@ -8,16 +8,16 @@
       <van-tab title="价格" name="price"></van-tab>
     </van-tabs>
 
-    <!-- <EmptyComp /> -->
+    <EmptyComp v-if="!list.length" />
 
-    <div class="list">
+    <div class="list" v-else>
       <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
         <van-list
           v-model:loading="loading"
           :finished="finished"
+          :immediate-check="false"
           finished-text="没有更多了"
           @load="onLoad"
-          @offset="10"
         >
           <div class="card" v-for="i in list" :key="i.goodsId">
             <van-card
@@ -37,7 +37,7 @@
 import SearchBarComp from "../components/SearchBarComp.vue";
 import EmptyComp from "../components/EmptyComp.vue";
 
-import { reactive, toRefs } from "vue";
+import { reactive, toRefs, ref, watch } from "vue";
 import { search } from "../api/api";
 
 import * as ResTypes from "../types/response";
@@ -52,7 +52,7 @@ export default {
     const state = reactive({
       active: 0,
       refreshing: false,
-      loading: false,
+      loading: true,
       finished: false,
       list: [] as ResTypes.GoodsData[],
       totalPage: 0,
@@ -73,18 +73,20 @@ export default {
         keyword: state.keyword,
         orderBy: state.orderBy,
       };
-      const res = await search(data);
-      state.list = [...res.list, ...state.list];
-      state.totalPage = res.totalPage;
 
+      const res = await search(data);
+
+      state.totalPage = res.totalPage;
+      state.list = [...state.list, ...res.list];
       state.loading = false;
       if (state.page >= res.totalPage) {
         state.finished = true;
+        return;
       }
     };
 
     const onLoad = () => {
-      if (!state.refreshing && state.page < state.totalPage) {
+      if (!state.refreshing && state.page <= state.totalPage) {
         state.page = state.page + 1;
       }
       if (state.refreshing) {
@@ -107,7 +109,10 @@ export default {
       onRefresh();
     };
 
-    const changeTab = () => {};
+    const changeTab = (name: string) => {
+      state.orderBy = name;
+      onRefresh();
+    };
 
     return {
       ...toRefs(state),
@@ -121,6 +126,12 @@ export default {
 </script>
 
 <style lang="less">
+.search-box {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
 .card {
   padding: 2.67vw 0;
   border-bottom: 1px solid #dcdcdc;
@@ -130,7 +141,6 @@ export default {
 }
 .list {
   height: calc(100vh - 54px - 44px);
-  overflow: hidden;
-  overflow-y: scroll;
+  overflow: auto;
 }
 </style>

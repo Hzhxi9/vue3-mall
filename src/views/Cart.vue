@@ -43,7 +43,7 @@ export default {
     NavBarComp,
     GoodsCardComp,
   },
-  setup(refs) {
+  setup(rfs) {
     const store = useStore();
     const state = reactive({
       checked: true,
