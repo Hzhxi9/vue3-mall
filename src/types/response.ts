@@ -44,3 +44,11 @@ export interface GoodsDetailData {
   sellingPrice: number;
   tag: string;
 }
+
+export interface SearchData {
+  currPage: number;
+  pageSize: number;
+  totalCount: number;
+  totalPage: number;
+  list: GoodsData[];
+}

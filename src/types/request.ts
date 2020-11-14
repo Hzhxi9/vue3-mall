@@ -22,7 +22,7 @@ export interface SearchParams {
   pageNumber: number;
   goodsCategoryId: string;
   keyword: string;
-  orderBy: number;
+  orderBy: string;
 }
 
 export interface CreateOrderParams {

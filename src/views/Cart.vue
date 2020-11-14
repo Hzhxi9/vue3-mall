@@ -1,5 +1,5 @@
 <template>
-  <div class="empty" v-if="false">
+  <div class="empty" v-if="!goods.length">
     <img src="//s.yezgea02.com/1604028375097/empty-car.png" alt="空购物车" />
     <div class="title">购物车空空如也</div>
     <van-button round color="#1baeae" @click="jumpToPage({ name: 'Home' })">前往选购</van-button>
@@ -29,11 +29,13 @@
 <script lang="ts">
 import NavBarComp from "../components/NavBarComp.vue";
 import GoodsCardComp from "../components/GoodsCardComp.vue";
+import mixins from "../mixins";
+
 import { useStore } from "vuex";
 import { reactive, toRefs, ref, computed, watch, onMounted } from "vue";
-import mixins from "../mixins";
 import { UserMutations } from "../store/mutation-types";
 import { GoodType } from "../store";
+
 export default {
   name: "Cart",
   mixins: [mixins],

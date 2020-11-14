@@ -25,7 +25,7 @@ export function getCategory(): Promise<ResTypes.CategoriesData[]> {
   });
 }
 
-export function search(params: { id: number }) {
+export function search(params: ReqTypes.SearchParams): Promise<ResTypes.SearchData> {
   return request({
     url: "/search",
     method: "GET",

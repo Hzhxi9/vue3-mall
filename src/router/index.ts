@@ -6,6 +6,7 @@ import Categories from "../views/Categories.vue";
 import Login from "../views/Login.vue";
 import User from "../views/User.vue";
 import GoodDetail from "../views/GoodDetail.vue";
+import Search from "../views/Search.vue";
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path: "/good-detail",
     name: "GoodDetail",
     component: GoodDetail,
+  },
+  {
+    path: "/search",
+    name: "Search",
+    component: Search,
   },
 ];
 

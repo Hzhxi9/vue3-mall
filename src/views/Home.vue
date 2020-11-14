@@ -2,7 +2,7 @@
   <div class="warp">
     <header class="nar-bar" :class="{ active: isChangheColor }">
       <van-icon name="apps-o" size="20" :color="isChangheColor ? '#fff' : '#1baeae'" />
-      <div>
+      <div @click="jumpToPage({ name: 'Search' })">
         <h3>新蜂商城</h3>
         <span>山海无恙,人间皆安</span>
       </div>

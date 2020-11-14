@@ -17,6 +17,7 @@
 
 <script lang="ts">
 import { reactive, toRefs } from "vue";
+import { Toast } from "vant";
 export default {
   name: "SearchBarComp",
   props: {
@@ -25,13 +26,17 @@ export default {
       default: false,
     },
   },
-  setup() {
+  setup(props, ctx) {
     const state = reactive({
       keyword: "",
     });
 
     const search = (value: string) => {
-      //
+      if (!state.keyword) {
+        Toast.fail("请输入关键词");
+        return;
+      }
+      ctx.emit("search", value);
     };
 
     return {
