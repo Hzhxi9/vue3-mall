@@ -18,15 +18,15 @@ service.defaults.headers.post["Content-Type"] = "application/json";
 service.defaults.headers["token"] = localStorage.getItem("token") || null;
 
 service.interceptors.request.use(
-  config => config,
-  error => Promise.reject(error)
+  (config) => config,
+  (error) => Promise.reject(error)
 );
 
 service.interceptors.response.use(
-  response => {
+  (response) => {
     return response;
   },
-  error => {
+  (error) => {
     Toast({
       message: error.data.message,
       duration: 1500,
@@ -37,7 +37,7 @@ service.interceptors.response.use(
 );
 
 export default function request(config: AxiosRequestConfig) {
-  return service(config).then(response => {
+  return service(config).then((response) => {
     Toast.loading("加载中");
     if (typeof response.data !== "object") {
       Toast.fail("服务器异常");

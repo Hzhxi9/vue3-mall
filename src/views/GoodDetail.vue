@@ -1,12 +1,7 @@
 <template>
   <van-nav-bar title="商品详情" left-arrow @click-left="goBack" />
   <main>
-    <van-swipe
-      class="goods-swipe"
-      :autoplay="3000"
-      indicator-color="white"
-      v-if="detail"
-    >
+    <van-swipe class="goods-swipe" :autoplay="3000" indicator-color="white" v-if="detail">
       <van-swipe-item v-for="e in detail.goodsCarouselList" :key="e">
         <img :src="e" alt="" />
       </van-swipe-item>
@@ -32,18 +27,8 @@
       :badge="goods && goods.length"
       @click="jumpToPage({ name: 'Cart' })"
     />
-    <van-action-bar-button
-      color="#be99ff"
-      type="warning"
-      text="加入购物车"
-      @click="addCart"
-    />
-    <van-action-bar-button
-      color="#7232dd"
-      type="danger"
-      text="立即购买"
-      @click="jumpCart"
-    />
+    <van-action-bar-button color="#be99ff" type="warning" text="加入购物车" @click="addCart" />
+    <van-action-bar-button color="#7232dd" type="danger" text="立即购买" @click="jumpCart" />
   </van-action-bar>
 </template>
 
@@ -89,12 +74,7 @@ export default {
 
     const addCart = () => {
       if (state.detail) {
-        const {
-          goodsCoverImg,
-          goodsId,
-          goodsName,
-          originalPrice,
-        } = state.detail;
+        const { goodsCoverImg, goodsId, goodsName, originalPrice } = state.detail;
         store.commit(UserMutations.SET_GOODS, {
           goodsCoverImg,
           goodsId,
@@ -107,12 +87,7 @@ export default {
 
     const jumpCart = () => {
       if (state.detail) {
-        const {
-          goodsCoverImg,
-          goodsId,
-          goodsName,
-          originalPrice,
-        } = state.detail;
+        const { goodsCoverImg, goodsId, goodsName, originalPrice } = state.detail;
         store.commit(UserMutations.SET_GOODS, {
           goodsCoverImg,
           goodsId,
