@@ -19,7 +19,7 @@
 <script lang="ts">
 import { reactive, toRefs, watch } from "vue";
 import { Toast } from "vant";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 export default {
   name: "SearchBarComp",
   props: {
@@ -30,8 +30,10 @@ export default {
   },
   setup(props, ctx) {
     const router = useRouter();
+    const route = useRoute();
+
     const state = reactive({
-      keyword: "",
+      keyword: route.query.categoryName || "",
     });
 
     const search = (value: string) => {

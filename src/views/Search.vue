@@ -30,6 +30,9 @@
               :desc="i.goodsIntro"
               :title="i.goodsName"
               :thumb="$filters.prefix(i.goodsCoverImg)"
+              @click="
+                jumpToPage({ name: 'GoodDetail', query: { id: i.goodsId } })
+              "
             />
           </div>
         </van-list>
@@ -41,25 +44,29 @@
 <script lang="ts">
 import SearchBarComp from "../components/SearchBarComp.vue";
 import EmptyComp from "../components/EmptyComp.vue";
+import mixins from "../mixins";
 
-import { reactive, toRefs, ref, watch } from "vue";
-import { useRouter } from "vue-router";
+import { reactive, toRefs, ref, watch, computed, onMounted } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import { search } from "../api/api";
 
 import * as ResTypes from "../types/response";
 
 export default {
   name: "Search",
+  mixins: [mixins],
   components: {
     SearchBarComp,
     EmptyComp,
   },
   setup() {
     const router = useRouter();
+    const route = useRoute();
+
     const state = reactive({
       active: 0,
       refreshing: false,
-      loading: true,
+      loading: false,
       finished: false,
       list: [] as ResTypes.GoodsData[],
       totalPage: 0,
@@ -68,15 +75,20 @@ export default {
       keyword: "",
     });
 
+    onMounted(() => {
+      init();
+    });
+
     const init = async () => {
-      if (!state.keyword) {
-        state.finished = true;
-        state.loading = false;
-        return;
-      }
+      const { categoryId } = route.query;
+      // if (!state.keyword) {
+      //   state.finished = true;
+      //   state.loading = false;
+      //   return;
+      // }
       const data = {
         pageNumber: state.page,
-        goodsCategoryId: "",
+        goodsCategoryId: typeof categoryId === "string" ? categoryId : "",
         keyword: state.keyword,
         orderBy: state.orderBy,
       };

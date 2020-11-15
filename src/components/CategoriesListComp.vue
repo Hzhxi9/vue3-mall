@@ -2,8 +2,23 @@
   <div class="warp">
     <h3>{{ list.categoryName }}</h3>
     <ul>
-      <li v-for="item in list.thirdLevelCategoryVOS" :key="item.categoryId">
-        <img src="//s.weituibao.com/1583591077131/%E5%88%86%E7%B1%BB.png" class="product-img" />
+      <li
+        v-for="item in list.thirdLevelCategoryVOS"
+        :key="item.categoryId"
+        @click="
+          jumpToPage({
+            name: 'Search',
+            query: {
+              categoryId: item.categoryId,
+              categoryName: item.categoryName,
+            },
+          })
+        "
+      >
+        <img
+          src="//s.weituibao.com/1583591077131/%E5%88%86%E7%B1%BB.png"
+          class="product-img"
+        />
         <p>{{ item.categoryName }}</p>
       </li>
     </ul>
@@ -12,8 +27,11 @@
 
 <script lang="ts">
 import { CategoriesData } from "../types/response";
+import mixins from "../mixins";
+
 export default {
   name: "CategoriesListComp",
+  mixins: [mixins],
   props: {
     list: {
       type: Object as () => CategoriesData,
