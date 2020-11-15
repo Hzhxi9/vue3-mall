@@ -1,6 +1,11 @@
 <template>
   <div class="search-box">
-    <SearchBarComp showArrow @search="handleSearch" ref="searchRef" />
+    <SearchBarComp
+      showArrow
+      @search="handleSearch"
+      @change="handleChange"
+      @cancel="handleCancel"
+    />
 
     <van-tabs v-model:active="active" color="#1baeae" @click="changeTab">
       <van-tab title="推荐" name=""></van-tab>
@@ -38,6 +43,7 @@ import SearchBarComp from "../components/SearchBarComp.vue";
 import EmptyComp from "../components/EmptyComp.vue";
 
 import { reactive, toRefs, ref, watch } from "vue";
+import { useRouter } from "vue-router";
 import { search } from "../api/api";
 
 import * as ResTypes from "../types/response";
@@ -49,6 +55,7 @@ export default {
     EmptyComp,
   },
   setup() {
+    const router = useRouter();
     const state = reactive({
       active: 0,
       refreshing: false,
@@ -114,12 +121,31 @@ export default {
       onRefresh();
     };
 
+    const handleChange = () => {
+      state.refreshing = false;
+      state.finished = false;
+      state.loading = false;
+      state.page = 1;
+      state.list = [];
+    };
+
+    const handleCancel = () => {
+      state.refreshing = false;
+      state.finished = false;
+      state.loading = false;
+      state.page = 1;
+      state.list = [];
+      router.back();
+    };
+
     return {
       ...toRefs(state),
       onRefresh,
       onLoad,
       handleSearch,
       changeTab,
+      handleChange,
+      handleCancel,
     };
   },
 };

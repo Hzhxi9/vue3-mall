@@ -7,6 +7,7 @@
       shape="round"
       placeholder="请输入搜索关键词"
       @search="search"
+      @cancel="cancel"
     >
       <template #left v-if="showArrow">
         <van-icon name="arrow-left" @click="goBack" />
@@ -16,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { reactive, toRefs } from "vue";
+import { reactive, toRefs, watch } from "vue";
 import { Toast } from "vant";
 import { useRouter } from "vue-router";
 export default {
@@ -41,14 +42,27 @@ export default {
       ctx.emit("search", value);
     };
 
+    watch(
+      () => state.keyword,
+      (newValue) => {
+        ctx.emit("change");
+      }
+    );
+
     const goBack = () => {
       router.back();
+    };
+
+    const cancel = () => {
+      console.log("quxiao");
+      ctx.emit("cancel");
     };
 
     return {
       ...toRefs(state),
       search,
       goBack,
+      cancel,
     };
   },
 };
