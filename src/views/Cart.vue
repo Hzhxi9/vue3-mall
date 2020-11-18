@@ -4,6 +4,8 @@
     <div class="title">购物车空空如也</div>
     <van-button round color="#1baeae" @click="jumpToPage({ name: 'Home' })">前往选购</van-button>
   </div>
+
+
   <div class="cart" v-else>
     <van-checkbox-group v-model="result" ref="checkboxGroup" @change="groupChange">
       <GoodsCardComp
@@ -22,6 +24,7 @@
     >
       <van-checkbox v-model="checked" @click="changeAll">全选</van-checkbox>
     </van-submit-bar>
+    
   </div>
   <NavBarComp />
 </template>
@@ -43,7 +46,7 @@ export default {
     NavBarComp,
     GoodsCardComp,
   },
-  setup(rfs) {
+  setup() {
     const store = useStore();
     const state = reactive({
       checked: true,

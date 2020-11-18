@@ -7,6 +7,8 @@ import Login from "../views/Login.vue";
 import User from "../views/User.vue";
 import GoodDetail from "../views/GoodDetail.vue";
 import Search from "../views/Search.vue";
+import Address from "../views/Address.vue";
+import AddAddress from '../views/AddAddress.vue';
 
 const routes = [
   {
@@ -48,6 +50,16 @@ const routes = [
     path: "/search",
     name: "Search",
     component: Search,
+  },
+  {
+    path: "/address",
+    name: "Address",
+    component: Address,
+  },
+  {
+    path: "/add-address",
+    name: "AddAddress",
+    component: AddAddress,
   },
 ];
 

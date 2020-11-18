@@ -1,5 +1,6 @@
 <template>
   <div class="search-box">
+    
     <SearchBarComp
       showArrow
       @search="handleSearch"
@@ -81,7 +82,7 @@ export default {
 
     const init = async () => {
       const { categoryId } = route.query;
-      // if (!state.keyword) {
+       // if (!state.keyword) {
       //   state.finished = true;
       //   state.loading = false;
       //   return;
